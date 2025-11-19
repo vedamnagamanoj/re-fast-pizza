@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${robotoMono.variable} ${robotoMono.variable} antialiased`}
+        className={`${robotoMono.variable} antialiased`}
       >
         <ClientProviders>
           <div className="grid h-screen grid-rows-[auto_1fr_auto]">

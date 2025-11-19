@@ -12,12 +12,11 @@ export async function GET() {
       },
       { status: 200 }
     );
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       {
         status: "error",
         message: "There was a problem getting menu",
-        err,
       },
       {
         status: 500,

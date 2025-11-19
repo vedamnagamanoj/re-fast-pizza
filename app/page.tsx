@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import UserInput from "@/components/UserInput";
 
 function Page() {
   return (
@@ -9,19 +9,7 @@ function Page() {
           Straight out of the oven, straight to you.
         </span>
       </h1>
-      {/* {username !== "" ? (
-        <div>
-          <p className="mb-2">Hi! {username},</p>
-          <Button to="/menu" type="primary">
-            Continue ordering
-          </Button>
-        </div>
-      ) : (
-        <CreateUser />
-      )} */}
-      <Button to="/menu" type="primary">
-        Start ordering
-      </Button>
+      <UserInput />
     </div>
   );
 }

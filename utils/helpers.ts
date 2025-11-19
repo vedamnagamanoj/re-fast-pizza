@@ -27,3 +27,14 @@ export function getPosition(): Promise<GeolocationPosition> {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
+
+// export const generateOrderId = () => {
+//   const timeStamp = Date.now();
+//   const randomPart = Math.random().toString(36).substring(2, 5).toUpperCase();
+
+//   return `RFP${timeStamp}${randomPart}`;
+// };
+
+export const getEstimatedDelivery = (items: number) => {
+  return `${new Date(Date.now() + items * 10 * 60 * 1000).toISOString()}`;
+};

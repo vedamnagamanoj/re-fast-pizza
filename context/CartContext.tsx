@@ -21,6 +21,7 @@ type CartState = {
   getCurrentQuantityById: (id: string) => number;
   getTotalPizzaQuantity: () => number;
   getTotalPizzaCost: () => number;
+  isCartEmpty: boolean;
 };
 
 const CartContext = createContext<CartState | null>(null);
@@ -89,6 +90,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const getTotalPizzaCost = () =>
     cart.reduce((res, item) => res + item.totalPrice, 0);
 
+  const isCartEmpty = cart.length === 0;
+
   return (
     <CartContext.Provider
       value={{
@@ -101,6 +104,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         getCurrentQuantityById,
         getTotalPizzaQuantity,
         getTotalPizzaCost,
+        isCartEmpty,
       }}
     >
       {children}

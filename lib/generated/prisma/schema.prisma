@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  unitPrice   Int
+  imageUrl    String
+  ingredients String[]
+  soldOut     Boolean  @default(false)
+
+  cartItems CartItem[]
+
+  @@map("items")
+}
+
+model Order {
+  id                Int       @id @default(autoincrement())
+  customer          String
+  status            String
+  priority          Boolean   @default(false)
+  address           String
+  position          String?
+  estimatedDelivery DateTime? // make optional if you might not set it immediately
+  orderPrice        Int
+  priorityPrice     Int
+
+  cartItems CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("orders")
+}
+
+model CartItem {
+  id         Int    @id @default(autoincrement())
+  itemId     Int
+  name       String
+  quantity   Int
+  unitPrice  Int
+  totalPrice Int
+
+  orderId Int
+  order   Order @relation(fields: [orderId], references: [id])
+
+  item Item @relation(fields: [itemId], references: [id])
+
+  @@map("cart_items")
+}

@@ -14,6 +14,7 @@ type UserState = {
 
 type UserContextType = UserState & {
   updateName: (name: string) => void;
+  getUser: () => UserState;
   fetchAddress: () => Promise<void>;
 };
 
@@ -27,6 +28,16 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState("");
 
   const updateName = (name: string) => setUsername(name);
+
+  const getUser = () => {
+    return {
+      username,
+      status,
+      position,
+      address,
+      error,
+    };
+  };
 
   const fetchAddress = useCallback(async () => {
     try {
@@ -51,7 +62,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       setStatus("error");
       setError(
-        "There was a problem getting your address. Make sure to fill this field"
+        "There was a problem getting your address. Make sure to fill this field",
       );
     }
   }, []);
@@ -66,6 +77,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         error,
         updateName,
         fetchAddress,
+        getUser,
       }}
     >
       {children}
