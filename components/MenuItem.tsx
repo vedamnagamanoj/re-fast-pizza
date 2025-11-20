@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/utils/helpers";
-// import Image from "next/image";
+import Image from "next/image";
 import Button from "./Button";
 import UpdateItemQuantity from "./UpdateItemQuantity";
 import DeleteItem from "./DeleteItem";
@@ -18,7 +18,7 @@ type PizzaType = {
 
 function MenuItem({ pizza }: { pizza: PizzaType }) {
   // const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
-  const { id, name, unitPrice, ingredients, soldOut } = pizza;
+  const { id, name, unitPrice, ingredients, imageUrl, soldOut } = pizza;
   const { getCurrentQuantityById, addItem } = useCart();
 
   const currentQuantity = getCurrentQuantityById(id);
@@ -37,27 +37,28 @@ function MenuItem({ pizza }: { pizza: PizzaType }) {
   };
   return (
     <li className="flex gap-4 py-2">
-      {/* <Image
-        src={imageUrl}
-        alt={`${name}`}
-        width={50}
-        height={50}
-        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
-      /> */}
-      <div className="h-16 w-16 bg-yellow-100 flex items-center justify-center text-4xl">
-        🍕
+      <div className="relative h-24 w-24">
+        <Image
+          src={imageUrl}
+          alt={`${name}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover ${soldOut ? "opacity-70 grayscale" : ""}`}
+        />
       </div>
 
       <div className="flex grow flex-col pt-0.5">
         <p className="font-medium">{name}</p>
-        <p className="text-sm text-stone-500 capitalize italic">
+        <p className="text-sm capitalize italic text-stone-500">
           {ingredients.join(", ")}
         </p>
         <div className="mt-auto flex items-center justify-between">
           {!soldOut ? (
-            <p className="text-sm">{formatCurrency(unitPrice)}</p>
+            <p className="text-sm font-medium text-stone-700">
+              {formatCurrency(unitPrice)}
+            </p>
           ) : (
-            <p className="text-sm font-medium text-stone-500 uppercase">
+            <p className="text-sm font-medium uppercase text-stone-500">
               Sold Out
             </p>
           )}

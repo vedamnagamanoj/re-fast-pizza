@@ -24,7 +24,10 @@ export async function createOrderAction(formData: FormData) {
     0,
   );
 
-  const estimatedDelivery = getEstimatedDelivery(totalItems);
+  const estimatedDelivery = getEstimatedDelivery(
+    totalItems,
+    data.priority === "on",
+  );
 
   const newOrder = await prisma.$transaction(async (tx) => {
     // Step 1: Create Order

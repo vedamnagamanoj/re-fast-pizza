@@ -19,7 +19,7 @@ export default function CreateOrder() {
 
   const isLoadingAddress = addressStatus === "loading";
 
-  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
+  const priorityPrice = withPriority ? totalCartPrice * 0.1 : 0;
   const billAmount = totalCartPrice + priorityPrice;
 
   if (!cart.length) return <EmptyCart />;
