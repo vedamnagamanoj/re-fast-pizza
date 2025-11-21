@@ -1,4 +1,4 @@
-import CreateOrder from "@/components/CreateOrder";
+import CreateOrder from "@/components/order/CreateOrder";
 
 function page() {
   return (

@@ -1,21 +1,12 @@
-import CartOverview from "@/components/CartOverview";
-import MenuItem from "@/components/MenuItem";
+import CartOverview from "@/components/cart/CartOverview";
+import MenuItem from "@/components/menu/MenuItem";
 
-type PizzaType = {
-  id: string;
-  name: string;
-  unitPrice: number;
-  imageUrl: string;
-  ingredients: string[];
-  soldOut: boolean;
-};
+import { PizzaType } from "@/types";
+
+import prisma from "@/lib/prisma";
 
 async function Page() {
-  const res = await fetch("http://localhost:3000/api/menu", {
-    cache: "no-store",
-  });
-
-  const { data: menu } = await res.json();
+  const menu = await prisma.item.findMany();
   return (
     <ul className="divide-y divide-stone-200 px-2">
       {menu.map((pizza: PizzaType) => (

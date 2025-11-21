@@ -1,9 +1,9 @@
-import type { CartItem } from "@/context/CartContext";
+import { CartItem as CartItemType } from "@/types";
 import { formatCurrency } from "@/utils/helpers";
 import DeleteItem from "./DeleteItem";
 import UpdateItemQuantity from "./UpdateItemQuantity";
 
-function CartItem({ item }: { item: CartItem }) {
+function CartItem({ item }: { item: CartItemType }) {
   const { id, name, quantity, totalPrice } = item;
   return (
     <li className="py-3 sm:flex sm:items-center sm:justify-between">

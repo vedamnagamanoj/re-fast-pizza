@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@/context/UserContext";
-import Button from "./Button";
+import Button from "../ui/Button";
 import CreateUser from "./CreateUser";
 
 function UserInput() {

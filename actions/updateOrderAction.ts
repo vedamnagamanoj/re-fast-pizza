@@ -5,7 +5,9 @@ import { getEstimatedDelivery } from "@/utils/helpers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function updateOrderAction(order) {
+import { Order } from "@/types";
+
+export async function updateOrderAction(order: Order) {
   const totalItems = order.cartItems.reduce(
     (res: number, item: any) => res + item.quantity,
     0,
@@ -21,7 +23,7 @@ export async function updateOrderAction(order) {
   });
 
   // Refresh data on the page
-  revalidatePath(`/order/${order.orderId}`);
+  revalidatePath(`/order/${order.id}`);
 
   // Redirect or just stay – you choose
   // redirect(`/order/${orderId}`);

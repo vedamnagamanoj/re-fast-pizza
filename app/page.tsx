@@ -1,4 +1,4 @@
-import UserInput from "@/components/UserInput";
+import UserInput from "@/components/user/UserInput";
 
 function Page() {
   return (

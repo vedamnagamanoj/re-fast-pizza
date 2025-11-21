@@ -1,4 +1,4 @@
-import Order from "@/components/Order";
+import Order from "@/components/order/Order";
 import prisma from "@/lib/prisma";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -16,7 +16,8 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   }
 
   const now = new Date();
-  const shouldBeDelivered = order.estimatedDelivery <= now;
+  const shouldBeDelivered =
+    order.estimatedDelivery && order.estimatedDelivery <= now;
 
   if (shouldBeDelivered && order.status !== "delivered") {
     await prisma.order.update({
@@ -30,6 +31,8 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       where: { id: orderId },
       include: { cartItems: true },
     });
+
+    if (!updatedOrder) return null;
 
     return <Order order={updatedOrder} />;
   }

@@ -1,6 +1,15 @@
+import { CartItem } from "@/types";
 import { formatCurrency } from "@/utils/helpers";
 
-function OrderItem({ item, isLoadingIngredients = false, ingredients = [] }) {
+function OrderItem({
+  item,
+  isLoadingIngredients = false,
+  ingredients = [],
+}: {
+  item: CartItem;
+  isLoadingIngredients?: boolean;
+  ingredients?: string[];
+}) {
   const { quantity, name, totalPrice } = item;
   return (
     <li className="space-y-1 py-3">

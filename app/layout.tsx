@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import ClientProviders from "@/components/ClientProviders";
-import CartOverview from "@/components/CartOverview";
+import Header from "@/components/ui/Header";
+import ClientProviders from "@/components/ui/ClientProviders";
+import CartOverview from "@/components/cart/CartOverview";
+import Footer from "@/components/ui/Footer";
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
@@ -31,8 +32,10 @@ export default function RootLayout({
             <div className="overflow-y-scroll">
               <main className="mx-auto max-w-3xl">{children}</main>
             </div>
-            <CartOverview />
+            <Footer />
           </div>
+          {/* Fixed position cart snackbar */}
+          <CartOverview />
         </ClientProviders>
       </body>
     </html>

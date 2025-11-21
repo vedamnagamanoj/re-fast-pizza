@@ -2,23 +2,17 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-export type CartItem = {
-  id: string;
-  name: string;
-  quantity: number;
-  unitPrice: number;
-  totalPrice: number;
-};
+import { CartItem } from "@/types";
 
 type CartState = {
   cart: CartItem[];
 
   addItem: (newItem: CartItem) => void;
-  removeItem: (id: string) => void;
-  increaseItemQuantity: (id: string) => void;
-  decreaseItemQuantity: (id: string) => void;
+  removeItem: (id: number) => void;
+  increaseItemQuantity: (id: number) => void;
+  decreaseItemQuantity: (id: number) => void;
   clearCart: () => void;
-  getCurrentQuantityById: (id: string) => number;
+  getCurrentQuantityById: (id: number) => number;
   getTotalPizzaQuantity: () => number;
   getTotalPizzaCost: () => number;
   isCartEmpty: boolean;
@@ -27,27 +21,31 @@ type CartState = {
 const CartContext = createContext<CartState | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") return [];
-
-    const saved = localStorage.getItem("cart");
-
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    const saved = localStorage.getItem("cart");
+    if (saved) {
+      setCart(JSON.parse(saved));
+    }
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isInitialized) return;
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  }, [cart, isInitialized]);
 
   const addItem = (newItem: CartItem) => {
     setCart((prev) => [newItem, ...prev]);
   };
 
-  const removeItem = (id: string) => {
+  const removeItem = (id: number) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const increaseItemQuantity = (id: string) => {
+  const increaseItemQuantity = (id: number) => {
     setCart((prev) =>
       prev.map((item) => {
         if (item.id === id)
@@ -61,7 +59,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const decreaseItemQuantity = (id: string) => {
+  const decreaseItemQuantity = (id: number) => {
     setCart((prev) =>
       prev
         .map((item) =>
@@ -81,7 +79,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart([]);
   };
 
-  const getCurrentQuantityById = (id: string) =>
+  const getCurrentQuantityById = (id: number) =>
     cart.reduce((res, item) => (item.id === id ? item.quantity : res), 0);
 
   const getTotalPizzaQuantity = () =>

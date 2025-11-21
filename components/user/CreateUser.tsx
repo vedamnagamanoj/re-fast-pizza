@@ -2,7 +2,7 @@
 
 import { useUser } from "@/context/UserContext";
 import { startTransition, useState } from "react";
-import Button from "./Button";
+import Button from "../ui/Button";
 import { useRouter } from "next/navigation";
 
 function CreateUser() {

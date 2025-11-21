@@ -1,8 +1,9 @@
+import { Order as OrderType } from "@/types";
 import { calcMinutesLeft, formatCurrency, formatDate } from "@/utils/helpers";
 import OrderItem from "./OrderItem";
 import UpdateOrder from "./UpdateOrder";
 
-function Order({ order }) {
+function Order({ order }: { order: OrderType }) {
   const {
     id,
     status,
@@ -13,7 +14,9 @@ function Order({ order }) {
     cartItems: cart,
   } = order;
 
-  const deliveryIn = calcMinutesLeft(estimatedDelivery);
+  const deliveryIn = estimatedDelivery
+    ? calcMinutesLeft(estimatedDelivery)
+    : 0;
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -40,7 +43,7 @@ function Order({ order }) {
             : `Delivered! Hope you're enjoying your pizzas 😄`}
         </p>
         <p className="text-xs text-stone-500">
-          {`${deliveryIn >= 0 ? "Estimated delivery: " : "Arrived around: "} ${formatDate(estimatedDelivery)}`}
+          {`${deliveryIn >= 0 ? "Estimated delivery: " : "Arrived around: "} ${estimatedDelivery ? formatDate(estimatedDelivery) : "N/A"}`}
         </p>
       </div>
 

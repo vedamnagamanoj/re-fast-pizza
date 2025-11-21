@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
-import Button from "./Button";
+import Button from "../ui/Button";
 
 function CartButtons() {
   const { clearCart, isCartEmpty } = useCart();

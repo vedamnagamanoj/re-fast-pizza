@@ -1,6 +1,6 @@
-import Cart from "@/components/Cart";
-import CartButtons from "@/components/CartButtons";
-import LinkButton from "@/components/LinkButton";
+import Cart from "@/components/cart/Cart";
+import CartButtons from "@/components/cart/CartButtons";
+import LinkButton from "@/components/ui/LinkButton";
 
 function Page() {
   return (

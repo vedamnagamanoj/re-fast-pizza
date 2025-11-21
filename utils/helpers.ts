@@ -7,7 +7,7 @@ export function formatCurrency(amount: number): string {
 
 type MonthType = Intl.DateTimeFormatOptions["month"];
 
-export function formatDate(dateStr: string, monthType: MonthType = "short") {
+export function formatDate(dateStr: string | Date, monthType: MonthType = "short") {
   return new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: monthType,
@@ -16,7 +16,7 @@ export function formatDate(dateStr: string, monthType: MonthType = "short") {
   }).format(new Date(dateStr));
 }
 
-export function calcMinutesLeft(dateStr: Date): number {
+export function calcMinutesLeft(dateStr: Date | string): number {
   const d1 = new Date().getTime();
   const d2 = new Date(dateStr).getTime();
   return Math.round((d2 - d1) / (60 * 1000));

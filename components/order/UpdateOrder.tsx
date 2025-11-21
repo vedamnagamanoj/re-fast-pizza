@@ -1,8 +1,9 @@
 "use client";
 
 import { updateOrderAction } from "@/actions/updateOrderAction";
+import { Order } from "@/types";
 
-export default function UpdateOrder({ order }) {
+export default function UpdateOrder({ order }: { order: Order }) {
   return (
     <form action={updateOrderAction.bind(null, order)}>
       <button
