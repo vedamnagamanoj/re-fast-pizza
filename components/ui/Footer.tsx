@@ -1,37 +1,52 @@
+import Link from "next/link";
+
 function Footer() {
   return (
-    <footer className="bg-stone-800 text-stone-300 py-3 px-4 border-t border-stone-700 w-full">
+    <footer className="w-full border-t border-stone-700 bg-stone-800 px-4 py-3 text-stone-300">
       <div className="w-full px-4">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
+        <div className="flex flex-col items-center justify-between gap-3 text-xs sm:flex-row">
           {/* Left: Branding */}
           <div className="flex items-center gap-2">
-            <span className="text-yellow-500 font-semibold">🍕 Fast React Pizza Co.</span>
-            <span className="hidden sm:inline text-stone-500">•</span>
-            <span className="text-stone-500">© {new Date().getFullYear()}</span>
+            <span className="font-semibold text-yellow-500">
+              🍕 Fast React Pizza Co.
+            </span>
+            <span className="hidden text-stone-500 sm:inline">•</span>
+            <span className="text-stone-500">
+              © {new Date().getFullYear()}
+            </span>
           </div>
 
           {/* Right: Links & Credit */}
           <div className="flex items-center gap-3 text-stone-400">
-            <a href="/menu" className="hover:text-yellow-500 transition-colors">
+            <Link
+              href="/menu"
+              className="transition-colors hover:text-yellow-500"
+            >
               Menu
-            </a>
+            </Link>
             <span>•</span>
-            <a href="/cart" className="hover:text-yellow-500 transition-colors">
+            <Link
+              href="/cart"
+              className="transition-colors hover:text-yellow-500"
+            >
               Cart
-            </a>
+            </Link>
             <span>•</span>
-            <a href="/order/new" className="hover:text-yellow-500 transition-colors">
+            <Link
+              href="/order/new"
+              className="transition-colors hover:text-yellow-500"
+            >
               Order
-            </a>
+            </Link>
             <span className="hidden sm:inline">•</span>
-            <a
+            <Link
               href="https://deepmind.google/technologies/gemini/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline hover:text-yellow-500 transition-colors"
+              className="hidden transition-colors hover:text-yellow-500 sm:inline"
             >
               Built with Antigravity
-            </a>
+            </Link>
           </div>
         </div>
       </div>
