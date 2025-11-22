@@ -1,8 +1,8 @@
 "use client";
 
 import { createOrderAction } from "@/actions/createOrderAction";
-import Button from "@/components/Button";
-import EmptyCart from "@/components/EmptyCart";
+import Button from "@/components/ui/Button";
+import EmptyCart from "@/components/cart/EmptyCart";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/context/UserContext";
 import { formatCurrency } from "@/utils/helpers";
